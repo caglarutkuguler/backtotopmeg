@@ -38,7 +38,7 @@ class Backtotopmeg extends Module
     {
         $this->name = 'backtotopmeg';
         $this->tab = 'administration';
-        $this->version = '1.0.2';
+        $this->version = '1.0.3';
         $this->author = 'MEG Venture';
         $this->need_instance = 0;
         $this->module_key = '94f25f128f4703813f076d5e25ca4ac0';
@@ -419,6 +419,7 @@ class Backtotopmeg extends Module
         $this->context->controller->addJS($this->_path . '/views/js/back/back.js');
         $this->context->controller->addCSS($this->_path . '/views/css/all.css');
         $this->context->controller->addCSS($this->_path . '/views/css/jquery-backToTop.min.css');
+        $this->context->controller->addCSS($this->_path . '/views/css/button_effects.css');
     }
 
     /**
@@ -452,6 +453,7 @@ class Backtotopmeg extends Module
 
         $this->context->controller->addCSS($this->_path . '/views/css/all.css');
         $this->context->controller->addCSS($this->_path . '/views/css/jquery-backToTop.min.css');
+        $this->context->controller->addCSS($this->_path . '/views/css/button_effects.css');
     }
 
     public function hookDisplayHeader()
