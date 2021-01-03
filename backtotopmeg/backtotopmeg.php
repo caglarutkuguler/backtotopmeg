@@ -38,7 +38,7 @@ class Backtotopmeg extends Module
     {
         $this->name = 'backtotopmeg';
         $this->tab = 'administration';
-        $this->version = '1.0.3';
+        $this->version = '1.0.4';
         $this->author = 'MEG Venture';
         $this->need_instance = 0;
         $this->module_key = '94f25f128f4703813f076d5e25ca4ac0';
@@ -410,7 +410,7 @@ class Backtotopmeg extends Module
             'z_index' => Configuration::get('z_index'),
         ));
 
-        if (_PS_VERSION_ > '1.7.0') {
+        if ((_PS_VERSION_ > '1.7.0') && (_PS_VERSION_ < '1.7.7')){
             // $this->context->controller->addJquery();
             $this->context->controller->addJS(($this->_path) . '/views/js/back/jquery-1.11.0.min.js');
         }
