@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2020 PrestaShop
+ * 2007-2021 PrestaShop
  *
  * NOTICE OF LICENSE
  *
@@ -19,7 +19,7 @@
  * needs please refer to http://www.prestashop.com for more information.
  *
  *  @author    PrestaShop SA <contact@prestashop.com>
- *  @copyright 2007-2020 PrestaShop SA
+ *  @copyright 2007-2021 PrestaShop SA
  *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  *  International Registered Trademark & Property of PrestaShop SA
  */
@@ -50,8 +50,8 @@ class Backtotopmeg extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('Back to Top Button');
-        $this->description = $this->l('Add a customizable back to top button to your pages.');
+        $this->displayName = $this->l('Back to Top and Scroll to Bottom Buttons');
+        $this->description = $this->l('Add a customizable Back to Top and Scroll to Bottom Buttons to your pages.');
 
         /* Backward compatibility */
         if (version_compare(_PS_VERSION_, '1.5.0.0 ', '<')) {
@@ -177,7 +177,7 @@ class Backtotopmeg extends Module
                                 'label' => $this->l('No'),
                             ),
                         ),
-                        'desc' => $this->l('enable the back to top button on the front office'),
+                        'desc' => $this->l('enable the Back to Top and Scroll to Bottom Buttons on the front office'),
                     ),
                     array(
                         'type' => 'switch',
@@ -196,7 +196,7 @@ class Backtotopmeg extends Module
                                 'label' => $this->l('No'),
                             ),
                         ),
-                        'desc' => $this->l('enable the back to top button on the back office'),
+                        'desc' => $this->l('enable the Back to Top and Scroll to Bottom Buttons on the back office'),
                     ),
                     array(
                         'type' => 'color',

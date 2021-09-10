@@ -1,5 +1,5 @@
 {*
-* 2007-2020 PrestaShop
+* 2007-2021 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -18,13 +18,13 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author    PrestaShop SA <contact@prestashop.com>
-*  @copyright 2007-2020 PrestaShop SA
+*  @copyright 2007-2021 PrestaShop SA
 *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *}
 
 <div class="panel">
-	<h3><i class="icon icon-credit-card"></i> {l s='Back to Top Button Module' mod='backtotopmeg'}</h3>
+	<h3><i class="icon icon-credit-card"></i> {l s='Back to Top and Scroll to Bottom Buttons Module' mod='backtotopmeg'}</h3>
 	<p>
 		<strong>{l s='This module adds an animated button to the position you select at the backoffice and at the front office.' mod='backtotopmeg'}</strong><br />
 		{l s='The button is only visible when the vertical scroll bar is under the landing page height.' mod='backtotopmeg'}<br />
