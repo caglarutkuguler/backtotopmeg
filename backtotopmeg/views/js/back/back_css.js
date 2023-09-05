@@ -25,43 +25,56 @@
 * Don't forget to prefix your containers with your own identifier
 * to avoid any conflicts with others containers.
 */
-
 $(document).ready(function(){
-    if (window.pageYOffset + $(window).height() < $(document).height()) {
-        $('#scrollToBottom').css('display', 'block');
-    } else {
-        $('#scrollToBottom').css('display', 'none');
-    }
-    if (theme_stb == 'fawesome')
+    if (theme == 'fawesome')
         radius = '25%';
     else
         radius = '50%';
-
-    $('#scrollToBottom').css({
-        'color':text_stb,
-        'background-color':background_stb,
-        'height': height_stb,
-        'width': width_stb,
-        'z-index': z_index_stb,
+    $('#backToTop').css({
+        'color':text,
+        'background-color':background,
+        'height': height,
+        'width': width,
+        'z-index': z_index,
         '-webkit-border-radius': radius,
         'border-radius': radius
     });
-    $('#scrollToBottom').css({
-        'right': margin_x_stb+'px',
-        'top': margin_y_stb+'px',
+    $('#backToTop').css({
+        'right': margin_x+'px',
+        'bottom': margin_y+'px',
     });
     window.addEventListener('scroll', () => {
-    if (window.pageYOffset + $(window).height() < $(document).height()) {
-        $('#scrollToBottom').css('display', 'block');
-    } else {
-        $('#scrollToBottom').css('display', 'none');
-    }
+        if (effect == 'fade') {
+            if (window.pageYOffset > 0) {
+                $('#backToTop').fadeIn(500);
+            } else {
+                $('#backToTop').fadeOut(500);
+            }
+        }
+        if ((effect == 'spin') || (effect == 'spin-inverse')) {
+            var element = document.getElementById('backToTop');
+            if (window.pageYOffset > 0) {
+              element.classList.add('show');
+            } else {
+              element.classList.remove('show');
+            }
+        }
+        if (effect == 'zoom') {
+            var element = document.getElementById('backToTop');
+            if (window.pageYOffset > 0) {
+              element.classList.add('show');
+              element.classList.remove('hide');
+            } else {
+              element.classList.add('hide');
+              element.classList.remove('show');
+            }
+        }
     });
 });
 
-$(function () {
-    $('#scrollToBottom').bind("click", function () {
-        $('html, body').animate({ scrollTop: $(document).height() }, scrollAnimation_stb);
+  $(function () {
+    $('#backToTop').bind("click", function () {
+        $('html, body').animate({ scrollTop: 0 }, scrollAnimation);
         return false;
     });
 });

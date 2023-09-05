@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2022 PrestaShop
+ * 2007-2023 PrestaShop
  *
  * NOTICE OF LICENSE
  *
@@ -19,7 +19,7 @@
  * needs please refer to http://www.prestashop.com for more information.
  *
  *  @author    PrestaShop SA <contact@prestashop.com>
- *  @copyright 2007-2022 PrestaShop SA
+ *  @copyright 2007-2023 PrestaShop SA
  *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  *  International Registered Trademark & Property of PrestaShop SA
  */
@@ -39,7 +39,7 @@ class Backtotopmeg extends Module
     {
         $this->name = 'backtotopmeg';
         $this->tab = 'administration';
-        $this->version = '1.1.1';
+        $this->version = '1.1.3';
         $this->author = 'MEG Venture';
         $this->need_instance = 0;
         $this->module_key = '94f25f128f4703813f076d5e25ca4ac0';
@@ -60,6 +60,7 @@ class Backtotopmeg extends Module
     {
         Configuration::updateValue('front_enable', true);
         Configuration::updateValue('back_enable', true);
+        Configuration::updateValue('button_code', 'jquery');
         Configuration::updateValue('background', '#5D5D5D');
         Configuration::updateValue('text', '#FFFFFF');
         Configuration::updateValue('effect', 'zoom');
@@ -85,6 +86,7 @@ class Backtotopmeg extends Module
         return parent::install() &&
         $this->registerHook('header') &&
         $this->registerHook('backOfficeHeader') &&
+        $this->registerHook('displayBackOfficeHeader') &&
         $this->registerHook('displayHeader');
     }
 
@@ -92,6 +94,7 @@ class Backtotopmeg extends Module
     {
         Configuration::deleteByName('front_enable');
         Configuration::deleteByName('back_enable');
+        Configuration::deleteByName('button_code');
         Configuration::deleteByName('background');
         Configuration::deleteByName('text');
         Configuration::deleteByName('effect');
@@ -229,6 +232,25 @@ class Backtotopmeg extends Module
                             ),
                         ),
                         'desc' => $this->l('enable the Back to Top Button on the back office'),
+                    ),
+                    array(
+                        'type' => 'switch',
+                        'label' => $this->l('Button coding'),
+                        'name' => 'button_code',
+                        'is_bool' => true,
+                        'values' => array(
+                            array(
+                                'id' => 'jquery',
+                                'value' => 'jquery',
+                                'label' => $this->l('jQuery'),
+                            ),
+                            array(
+                                'id' => 'css',
+                                'value' => 'css',
+                                'label' => $this->l('CSS'),
+                            ),
+                        ),
+                        'desc' => $this->l('if your theme does not support jQuery, choose CSS version'),
                     ),
                     array(
                         'type' => 'color',
@@ -494,6 +516,7 @@ class Backtotopmeg extends Module
         return array(
             'front_enable' => Configuration::get('front_enable', true),
             'back_enable' => Configuration::get('back_enable', true),
+            'button_code' => Configuration::get('button_code', true),
             'background' => Configuration::get('background', true),
             'text' => Configuration::get('text', true),
             'effect' => Configuration::get('effect', true),
@@ -613,21 +636,25 @@ class Backtotopmeg extends Module
             }
         }
     }
-
+    public function hookDisplayBackOfficeHeader()
+    {
+        return $this->hookBackOfficeHeader();
+    }
     public function hookBackOfficeHeader()
     {
-        if ((Configuration::get('back_enable') == true) ||
+        if (((Configuration::get('back_enable') == true) && (Configuration::get('button_code') == 'jquery')) ||
             (Configuration::get('back_enable_stb') == true)) {
             if ((_PS_VERSION_ > '1.7.0') && (_PS_VERSION_ < '1.7.7')) {
-                $this->context->controller->addJS(($this->_path) . '/views/js/back/jquery-1.11.0.min.js');
+                $this->context->controller->addJS($this->_path . 'views/js/back/jquery-1.11.0.min.js');
             }
-            $this->context->controller->addCSS($this->_path . '/views/css/all.css');
+            $this->context->controller->addCSS($this->_path . 'views/css/all.css');
         }
 
         if (Configuration::get('back_enable') == true) {
             Media::addJsDef(array(
                 'front_enable' => Configuration::get('front_enable'),
                 'back_enable' => Configuration::get('back_enable'),
+                'button_code' => Configuration::get('button_code'),
                 'background' => Configuration::get('background'),
                 'text' => Configuration::get('text'),
                 'effect' => Configuration::get('effect'),
@@ -640,10 +667,16 @@ class Backtotopmeg extends Module
                 'z_index' => Configuration::get('z_index'),
             ));
 
-            $this->context->controller->addJS($this->_path . '/views/js/jquery-backToTop.min.js');
-            $this->context->controller->addJS($this->_path . '/views/js/back/back.js');
-            $this->context->controller->addCSS($this->_path . '/views/css/jquery-backToTop.min.css');
-            $this->context->controller->addCSS($this->_path . '/views/css/button_effects.css');
+            $this->context->controller->addJS($this->_path . 'views/js/jquery-backToTop.min.js');
+            if (Configuration::get('button_code') == 'jquery') {
+                $this->context->controller->addJS($this->_path . 'views/js/back/back.js');
+                $this->context->controller->addCSS($this->_path . 'views/css/jquery-backToTop.min.css');
+            }
+            if (Configuration::get('button_code') == 'css') {
+                $this->context->controller->addJS($this->_path . 'views/js/back/back_css.js');
+                $this->context->controller->addCSS($this->_path . 'views/css/backToTop.css');
+            }
+            $this->context->controller->addCSS($this->_path . 'views/css/button_effects.css');
         }
 
         if (Configuration::get('back_enable_stb') == true) {
@@ -661,10 +694,22 @@ class Backtotopmeg extends Module
                 'z_index_stb' => Configuration::get('z_index_stb'),
             ));
 
-            $this->context->controller->addJS($this->_path . '/views/js/back/back_stb.js');
-            $this->context->controller->addCSS($this->_path . '/views/css/scrollToBottom.css');
-            $this->context->controller->addCSS($this->_path . '/views/css/button_effects_stb.css');
-            return $this->display(__FILE__, 'views/templates/admin/scrollToBottom.tpl');
+            $this->context->controller->addJS($this->_path . 'views/js/front/front_stb.js');
+            $this->context->controller->addCSS($this->_path . 'views/css/scrollToBottom.css');
+            $this->context->controller->addCSS($this->_path . 'views/css/button_effects_stb.css');
+        }
+        $this->context->smarty->assign(array(
+            'front_enable' => Configuration::get('front_enable'),
+            'back_enable' => Configuration::get('back_enable'),
+            'button_code' => Configuration::get('button_code'),
+            'effect' => Configuration::get('effect'),
+            'front_enable_stb' => Configuration::get('front_enable_stb'),
+            'back_enable_stb' => Configuration::get('back_enable_stb'),
+        ));
+        if (((Configuration::get('front_enable') == true) &&
+            (Configuration::get('button_code') == 'css')) ||
+            (Configuration::get('front_enable_stb') == true)) {
+            return $this->display(__FILE__, 'views/templates/front/css_button.tpl');
         }
     }
 
@@ -673,18 +718,19 @@ class Backtotopmeg extends Module
      */
     public function hookHeader()
     {
-        if ((Configuration::get('front_enable') == true) ||
+        if (((Configuration::get('front_enable') == true) && (Configuration::get('button_code') == 'jquery')) ||
             (Configuration::get('front_enable_stb') == true)) {
             if ((_PS_VERSION_ > '1.7.0') && (_PS_VERSION_ < '1.7.7')) {
                 $this->context->controller->addJS(($this->_path) . '/views/js/jquery-1.11.0.min.js');
             }
-            $this->context->controller->addCSS($this->_path . '/views/css/all.css');
+            $this->context->controller->addCSS($this->_path . 'views/css/all.css');
         }
 
         if (Configuration::get('front_enable') == true) {
             Media::addJsDef(array(
                 'front_enable' => Configuration::get('front_enable'),
                 'back_enable' => Configuration::get('back_enable'),
+                'button_code' => Configuration::get('button_code'),
                 'background' => Configuration::get('background'),
                 'text' => Configuration::get('text'),
                 'effect' => Configuration::get('effect'),
@@ -697,16 +743,22 @@ class Backtotopmeg extends Module
                 'z_index' => Configuration::get('z_index'),
             ));
 
-            if (_PS_VERSION_ > '1.7.0') {
-                $this->context->controller->registerJavascript('modules-backtotopmeg1', 'modules/' . $this->name . '/views/js/jquery-backToTop.min.js', array('position' => 'bottom', 'priority' => 150));
-                $this->context->controller->registerJavascript('modules-backtotopmeg2', 'modules/' . $this->name . '/views/js/front/front.js', array('position' => 'bottom', 'priority' => 150));
-            } else {
-                $this->context->controller->addJS($this->_path . '/views/js/jquery-backToTop.min.js');
-                $this->context->controller->addJS($this->_path . '/views/js/front/front.js');
+            if (Configuration::get('button_code') == 'jquery') {
+                if (_PS_VERSION_ > '1.7.0') {
+                    $this->context->controller->registerJavascript('modules-backtotopmeg1', 'modules/' . $this->name . '/views/js/jquery-backToTop.min.js', array('position' => 'bottom', 'priority' => 150));
+                    $this->context->controller->registerJavascript('modules-backtotopmeg2', 'modules/' . $this->name . '/views/js/front/front.js', array('position' => 'bottom', 'priority' => 151));
+                } else {
+                    $this->context->controller->addJS($this->_path . 'views/js/jquery-backToTop.min.js');
+                    $this->context->controller->addJS($this->_path . 'views/js/front/front.js');
+                }
+                $this->context->controller->addCSS($this->_path . 'views/css/jquery-backToTop.min.css');
+            }
+            if (Configuration::get('button_code') == 'css') {
+                $this->context->controller->addJS($this->_path . 'views/js/front/front_css.js');
+                $this->context->controller->addCSS($this->_path . 'views/css/backToTop.css');
             }
 
-            $this->context->controller->addCSS($this->_path . '/views/css/jquery-backToTop.min.css');
-            $this->context->controller->addCSS($this->_path . '/views/css/button_effects.css');
+            $this->context->controller->addCSS($this->_path . 'views/css/button_effects.css');
         }
 
         if (Configuration::get('front_enable_stb') == true) {
@@ -724,10 +776,22 @@ class Backtotopmeg extends Module
                 'z_index_stb' => Configuration::get('z_index_stb'),
             ));
 
-            $this->context->controller->addJS($this->_path . '/views/js/front/front_stb.js');
-            $this->context->controller->addCSS($this->_path . '/views/css/scrollToBottom.css');
-            $this->context->controller->addCSS($this->_path . '/views/css/button_effects_stb.css');
-            return $this->display(__FILE__, 'views/templates/front/scrollToBottom.tpl');
+            $this->context->controller->addJS($this->_path . 'views/js/front/front_stb.js');
+            $this->context->controller->addCSS($this->_path . 'views/css/scrollToBottom.css');
+            $this->context->controller->addCSS($this->_path . 'views/css/button_effects_stb.css');
+        }
+        $this->context->smarty->assign(array(
+            'front_enable' => Configuration::get('front_enable'),
+            'back_enable' => Configuration::get('back_enable'),
+            'button_code' => Configuration::get('button_code'),
+            'effect' => Configuration::get('effect'),
+            'front_enable_stb' => Configuration::get('front_enable_stb'),
+            'back_enable_stb' => Configuration::get('back_enable_stb'),
+        ));
+        if (((Configuration::get('front_enable') == true) &&
+            (Configuration::get('button_code') == 'css')) ||
+            (Configuration::get('front_enable_stb') == true)) {
+            return $this->display(__FILE__, 'views/templates/front/css_button.tpl');
         }
     }
 

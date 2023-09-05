@@ -10,9 +10,8 @@
      font-size: 150%;
      float:right;
 }
-
-.my-float-to-bottom{
-	margin-top:25%;
+.my-float-to-top{
+	margin-top:20%;
 }
 
 .float:hover {
