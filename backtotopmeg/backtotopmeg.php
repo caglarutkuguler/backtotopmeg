@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2023 PrestaShop
+ * 2007-2024 PrestaShop
  *
  * NOTICE OF LICENSE
  *
@@ -19,7 +19,7 @@
  * needs please refer to http://www.prestashop.com for more information.
  *
  *  @author    PrestaShop SA <contact@prestashop.com>
- *  @copyright 2007-2023 PrestaShop SA
+ *  @copyright 2007-2024 PrestaShop SA
  *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  *  International Registered Trademark & Property of PrestaShop SA
  */
@@ -39,11 +39,14 @@ class Backtotopmeg extends Module
     {
         $this->name = 'backtotopmeg';
         $this->tab = 'administration';
-        $this->version = '1.1.4';
+        $this->version = '1.1.5';
         $this->author = 'MEG Venture';
         $this->need_instance = 0;
         $this->module_key = '94f25f128f4703813f076d5e25ca4ac0';
-
+        $this->ps_versions_compliancy = [
+            'min' => '1.5.0.0',
+            'max' => '8.99.99',
+        ];
         $this->bootstrap = true;
 
         parent::__construct();
@@ -60,7 +63,7 @@ class Backtotopmeg extends Module
     {
         Configuration::updateValue('front_enable', true);
         Configuration::updateValue('back_enable', true);
-        Configuration::updateValue('button_code', 'jquery');
+        Configuration::updateValue('button_code', true); //true jquery, false css
         Configuration::updateValue('background', '#5D5D5D');
         Configuration::updateValue('text', '#FFFFFF');
         Configuration::updateValue('effect', 'zoom');
@@ -235,22 +238,22 @@ class Backtotopmeg extends Module
                     ),
                     array(
                         'type' => 'switch',
-                        'label' => $this->l('Button coding'),
+                        'label' => $this->l('JQuery Button'),
                         'name' => 'button_code',
                         'is_bool' => true,
                         'values' => array(
                             array(
                                 'id' => 'jquery',
-                                'value' => 'jquery',
+                                'value' => true,
                                 'label' => $this->l('jQuery'),
                             ),
                             array(
                                 'id' => 'css',
-                                'value' => 'css',
+                                'value' => false,
                                 'label' => $this->l('CSS'),
                             ),
                         ),
-                        'desc' => $this->l('if your theme does not support jQuery, choose CSS version'),
+                        'desc' => $this->l('if your theme does not support jQuery, choose (No) for the CSS version'),
                     ),
                     array(
                         'type' => 'color',
@@ -513,38 +516,72 @@ class Backtotopmeg extends Module
 
     protected function getConfigFormValues()
     {
-        return array(
-            'front_enable' => Configuration::get('front_enable', true),
-            'back_enable' => Configuration::get('back_enable', true),
-            'button_code' => Configuration::get('button_code', true),
-            'background' => Configuration::get('background', true),
-            'text' => Configuration::get('text', true),
-            'effect' => Configuration::get('effect', true),
-            'height' => Configuration::get('height', true),
-            'width' => Configuration::get('width', true),
-            'margin_x' => Configuration::get('margin_x', true),
-            'margin_y' => Configuration::get('margin_y', true),
-            'theme' => Configuration::get('theme', true),
-            'scrollAnimation' => Configuration::get('scrollAnimation', true),
-            'z_index' => Configuration::get('z_index', true),
-        );
+        if (_PS_VERSION_ < '1.7.0') {
+            return array(
+                'front_enable' => Configuration::get('front_enable'),
+                'back_enable' => Configuration::get('back_enable'),
+                'button_code' => Configuration::get('button_code'),
+                'background' => Configuration::get('background'),
+                'text' => Configuration::get('text'),
+                'effect' => Configuration::get('effect'),
+                'height' => Configuration::get('height'),
+                'width' => Configuration::get('width'),
+                'margin_x' => Configuration::get('margin_x'),
+                'margin_y' => Configuration::get('margin_y'),
+                'theme' => Configuration::get('theme'),
+                'scrollAnimation' => Configuration::get('scrollAnimation'),
+                'z_index' => Configuration::get('z_index'),
+            );
+        } else {
+            return array(
+                'front_enable' => Configuration::get('front_enable', true),
+                'back_enable' => Configuration::get('back_enable', true),
+                'button_code' => Configuration::get('button_code', true),
+                'background' => Configuration::get('background', true),
+                'text' => Configuration::get('text', true),
+                'effect' => Configuration::get('effect', true),
+                'height' => Configuration::get('height', true),
+                'width' => Configuration::get('width', true),
+                'margin_x' => Configuration::get('margin_x', true),
+                'margin_y' => Configuration::get('margin_y', true),
+                'theme' => Configuration::get('theme', true),
+                'scrollAnimation' => Configuration::get('scrollAnimation', true),
+                'z_index' => Configuration::get('z_index', true),
+            );
+        }
     }
 
     protected function getConfigFormValues_stb()
     {
-        return array(
-            'front_enable_stb' => Configuration::get('front_enable_stb', true),
-            'back_enable_stb' => Configuration::get('back_enable_stb', true),
-            'background_stb' => Configuration::get('background_stb', true),
-            'text_stb' => Configuration::get('text_stb', true),
-            'height_stb' => Configuration::get('height_stb', true),
-            'width_stb' => Configuration::get('width_stb', true),
-            'margin_x_stb' => Configuration::get('margin_x_stb', true),
-            'margin_y_stb' => Configuration::get('margin_y_stb', true),
-            'theme_stb' => Configuration::get('theme_stb', true),
-            'scrollAnimation_stb' => Configuration::get('scrollAnimation_stb', true),
-            'z_index_stb' => Configuration::get('z_index_stb', true),
-        );
+        if (_PS_VERSION_ < '1.7.0') {
+            return array(
+                'front_enable_stb' => Configuration::get('front_enable_stb'),
+                'back_enable_stb' => Configuration::get('back_enable_stb'),
+                'background_stb' => Configuration::get('background_stb'),
+                'text_stb' => Configuration::get('text_stb'),
+                'height_stb' => Configuration::get('height_stb'),
+                'width_stb' => Configuration::get('width_stb'),
+                'margin_x_stb' => Configuration::get('margin_x_stb'),
+                'margin_y_stb' => Configuration::get('margin_y_stb'),
+                'theme_stb' => Configuration::get('theme_stb'),
+                'scrollAnimation_stb' => Configuration::get('scrollAnimation_stb'),
+                'z_index_stb' => Configuration::get('z_index_stb'),
+            );
+        } else {
+            return array(
+                'front_enable_stb' => Configuration::get('front_enable_stb', true),
+                'back_enable_stb' => Configuration::get('back_enable_stb', true),
+                'background_stb' => Configuration::get('background_stb', true),
+                'text_stb' => Configuration::get('text_stb', true),
+                'height_stb' => Configuration::get('height_stb', true),
+                'width_stb' => Configuration::get('width_stb', true),
+                'margin_x_stb' => Configuration::get('margin_x_stb', true),
+                'margin_y_stb' => Configuration::get('margin_y_stb', true),
+                'theme_stb' => Configuration::get('theme_stb', true),
+                'scrollAnimation_stb' => Configuration::get('scrollAnimation_stb', true),
+                'z_index_stb' => Configuration::get('z_index_stb', true),
+            );
+        }
     }
 
     protected function postProcess()
@@ -642,10 +679,10 @@ class Backtotopmeg extends Module
     }
     public function hookBackOfficeHeader()
     {
-        if (((Configuration::get('back_enable') == true) && (Configuration::get('button_code') == 'jquery')) ||
+        if (((Configuration::get('back_enable') == true) && (Configuration::get('button_code') == true)) ||
             (Configuration::get('back_enable_stb') == true)) {
-            if ((_PS_VERSION_ > '1.7.0') && (_PS_VERSION_ < '1.7.7')) {
-                $this->context->controller->addJS($this->_path . 'views/js/back/jquery-1.11.0.min.js');
+            if ((_PS_VERSION_ > '1.6.0') && (_PS_VERSION_ < '1.7.7')) {
+                $this->context->controller->addJS($this->_path . 'views/js/jquery-1.11.0.min.js');
             }
             $this->context->controller->addCSS($this->_path . 'views/css/all.css');
         }
@@ -668,11 +705,11 @@ class Backtotopmeg extends Module
             ));
 
             $this->context->controller->addJS($this->_path . 'views/js/jquery-backToTop.min.js');
-            if (Configuration::get('button_code') == 'jquery') {
+            if (Configuration::get('button_code') == true) {
                 $this->context->controller->addJS($this->_path . 'views/js/back/back.js');
                 $this->context->controller->addCSS($this->_path . 'views/css/jquery-backToTop.min.css');
             }
-            if (Configuration::get('button_code') == 'css') {
+            if (Configuration::get('button_code') == false) {
                 $this->context->controller->addJS($this->_path . 'views/js/back/back_css.js');
                 $this->context->controller->addCSS($this->_path . 'views/css/backToTop.css');
             }
@@ -707,7 +744,7 @@ class Backtotopmeg extends Module
             'back_enable_stb' => Configuration::get('back_enable_stb'),
         ));
         if (((Configuration::get('front_enable') == true) &&
-            (Configuration::get('button_code') == 'css')) ||
+            (Configuration::get('button_code') == false)) ||
             (Configuration::get('front_enable_stb') == true)) {
             return $this->display(__FILE__, 'views/templates/front/css_button.tpl');
         }
@@ -718,7 +755,7 @@ class Backtotopmeg extends Module
      */
     public function hookHeader()
     {
-        if (((Configuration::get('front_enable') == true) && (Configuration::get('button_code') == 'jquery')) ||
+        if (((Configuration::get('front_enable') == true) && (Configuration::get('button_code') == true)) ||
             (Configuration::get('front_enable_stb') == true)) {
             if ((_PS_VERSION_ > '1.7.0') && (_PS_VERSION_ < '1.7.7')) {
                 $this->context->controller->addJS(($this->_path) . '/views/js/jquery-1.11.0.min.js');
@@ -743,7 +780,7 @@ class Backtotopmeg extends Module
                 'z_index' => Configuration::get('z_index'),
             ));
 
-            if (Configuration::get('button_code') == 'jquery') {
+            if (Configuration::get('button_code') == true) {
                 if (_PS_VERSION_ > '1.7.0') {
                     $this->context->controller->registerJavascript('modules-backtotopmeg1', 'modules/' . $this->name . '/views/js/jquery-backToTop.min.js', array('position' => 'bottom', 'priority' => 150));
                     $this->context->controller->registerJavascript('modules-backtotopmeg2', 'modules/' . $this->name . '/views/js/front/front.js', array('position' => 'bottom', 'priority' => 151));
@@ -753,7 +790,7 @@ class Backtotopmeg extends Module
                 }
                 $this->context->controller->addCSS($this->_path . 'views/css/jquery-backToTop.min.css');
             }
-            if (Configuration::get('button_code') == 'css') {
+            if (Configuration::get('button_code') == false) {
                 $this->context->controller->addJS($this->_path . 'views/js/front/front_css.js');
                 $this->context->controller->addCSS($this->_path . 'views/css/backToTop.css');
             }
@@ -789,7 +826,7 @@ class Backtotopmeg extends Module
             'back_enable_stb' => Configuration::get('back_enable_stb'),
         ));
         if (((Configuration::get('front_enable') == true) &&
-            (Configuration::get('button_code') == 'css')) ||
+            (Configuration::get('button_code') == false)) ||
             (Configuration::get('front_enable_stb') == true)) {
             return $this->display(__FILE__, 'views/templates/front/css_button.tpl');
         }

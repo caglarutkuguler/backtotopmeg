@@ -1,5 +1,5 @@
 /**
-* 2007-2023 PrestaShop
+* 2007-2024 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -18,21 +18,21 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author    PrestaShop SA <contact@prestashop.com>
-*  @copyright 2007-2023 PrestaShop SA
+*  @copyright 2007-2024 PrestaShop SA
 *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *
 * Don't forget to prefix your containers with your own identifier
 * to avoid any conflicts with others containers.
 */
-$(document).ready(function(){
+$(document).ready(function () {
     if (theme == 'fawesome')
         radius = '25%';
     else
         radius = '50%';
     $('#backToTop').css({
-        'color':text,
-        'background-color':background,
+        'color': text,
+        'background-color': background,
         'height': height,
         'width': width,
         'z-index': z_index,
@@ -40,11 +40,11 @@ $(document).ready(function(){
         'border-radius': radius
     });
     $('#backToTop').css({
-        'right': margin_x+'px',
-        'bottom': margin_y+'px',
+        'right': margin_x + 'px',
+        'bottom': margin_y + 'px',
     });
-        const container = document.querySelector('body');
-        container.addEventListener('scroll', () => {
+    const container = document.querySelector('body');
+    container.addEventListener('scroll', () => {
         if (effect == 'fade') {
             if (document.body.scrollTop > 0) {
                 $('#backToTop').fadeIn(500);
@@ -55,25 +55,25 @@ $(document).ready(function(){
         if ((effect == 'spin') || (effect == 'spin-inverse')) {
             var element = document.getElementById('backToTop');
             if (document.body.scrollTop > 0) {
-              element.classList.add('show');
+                element.classList.add('show');
             } else {
-              element.classList.remove('show');
+                element.classList.remove('show');
             }
         }
         if (effect == 'zoom') {
             var element = document.getElementById('backToTop');
             if (document.body.scrollTop > 0) {
-              element.classList.add('show');
-              element.classList.remove('hide');
+                element.classList.add('show');
+                element.classList.remove('hide');
             } else {
-              element.classList.add('hide');
-              element.classList.remove('show');
+                element.classList.add('hide');
+                element.classList.remove('show');
             }
         }
     });
 });
 
-  $(function () {
+$(function () {
     $('#backToTop').bind("click", function () {
         $('html, body').animate({ scrollTop: 0 }, scrollAnimation);
         return false;

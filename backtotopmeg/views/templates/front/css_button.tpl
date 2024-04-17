@@ -1,5 +1,5 @@
 {*
-* 2007-2023 PrestaShop
+* 2007-2024 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -18,86 +18,95 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author    PrestaShop SA <contact@prestashop.com>
-*  @copyright 2007-2023 PrestaShop SA
+*  @copyright 2007-2024 PrestaShop SA
 *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *}
 {if (($front_enable_stb == true) || ($back_enable_stb == true))}
-    <a href="#" class="float" id="scrollToBottom">
-        <i class="material-icons my-float-to-bottom">keyboard_arrow_down</i>
-    </a>
+  <a href="#" class="float" id="scrollToBottom">
+    <i class="fas fa-chevron-down"></i>
+  </a>
 {/if}
-{if (($front_enable == true) || ($back_enable == true)) && ($button_code == 'css')}
-    <a href="#" class="float" id="backToTop">
-        <i class="material-icons my-float-to-top">keyboard_arrow_up</i>
-    </a>
+{if (($front_enable == true) || ($back_enable == true)) && ($button_code == false)}
+  <a href="#" class="float" id="backToTop">
+    <i class="material-icons my-float-to-top">keyboard_arrow_up</i>
+  </a>
 {/if}
 {if ($effect == 'spin')}
-<style>
-#backToTop {
-  opacity: 0;
-  visibility: hidden;
-  cursor: pointer;
-  transition: opacity 0.5s ease-out;
-}
-#backToTop.show {
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 0.5s ease-in;
-  animation: spin 0.5s linear;
-}
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-</style>
-{/if}
-{if ($effect == 'spin-inverse')}
-    <style>
+  <style>
     #backToTop {
       opacity: 0;
       visibility: hidden;
       cursor: pointer;
       transition: opacity 0.5s ease-out;
     }
+
+    #backToTop.show {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.5s ease-in;
+      animation: spin 0.5s linear;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+{/if}
+{if ($effect == 'spin-inverse')}
+  <style>
+    #backToTop {
+      opacity: 0;
+      visibility: hidden;
+      cursor: pointer;
+      transition: opacity 0.5s ease-out;
+    }
+
     #backToTop.show {
       opacity: 1;
       visibility: visible;
       transition: opacity 0.5s ease-in;
       animation: spin-reverse 0.5s linear;
     }
+
     @keyframes spin-reverse {
-    0% {
+      0% {
         transform: rotate(0deg);
-    }
-    100% {
+      }
+
+      100% {
         transform: rotate(-360deg);
+      }
     }
-    </style>
+  </style>
 {/if}
 {if ($effect == 'zoom')}
-    <style>
+  <style>
     #backToTop {
-    opacity: 0;
-    visibility: hidden;
-    cursor: pointer;
-    transition: opacity 0.5s ease-out;
+      opacity: 0;
+      visibility: hidden;
+      cursor: pointer;
+      transition: opacity 0.5s ease-out;
     }
+
     #backToTop.show {
-    opacity: 1;
-    visibility: visible;
-    transition: all 0.5s ease-in-out;
-    transform: scale(1);
+      opacity: 1;
+      visibility: visible;
+      transition: all 0.5s ease-in-out;
+      transform: scale(1);
     }
+
     #backToTop.hide {
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.5s ease-in-out;
-    transform: scale(0.5);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.5s ease-in-out;
+      transform: scale(0.5);
     }
-    </style>
+  </style>
 {/if}

@@ -1,5 +1,5 @@
 /**
-* 2007-2023 PrestaShop
+* 2007-2024 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -18,7 +18,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author    PrestaShop SA <contact@prestashop.com>
-*  @copyright 2007-2023 PrestaShop SA
+*  @copyright 2007-2024 PrestaShop SA
 *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *
@@ -26,8 +26,8 @@
 * to avoid any conflicts with others containers.
 */
 
-$(document).ready(function(){
-    if (window.pageYOffset + $(window).height() < $(document).height()) {
+$(document).ready(function () {
+    if (window.scrollY + $(window).height() < $(document).height()) {
         $('#scrollToBottom').css('display', 'block');
     } else {
         $('#scrollToBottom').css('display', 'none');
@@ -38,24 +38,23 @@ $(document).ready(function(){
         radius = '50%';
 
     $('#scrollToBottom').css({
-        'color':text_stb,
-        'background-color':background_stb,
+        'color': text_stb,
+        'background-color': background_stb,
         'height': height_stb,
         'width': width_stb,
         'z-index': z_index_stb,
         '-webkit-border-radius': radius,
-        'border-radius': radius
-    });
-    $('#scrollToBottom').css({
-        'right': margin_x_stb+'px',
-        'top': margin_y_stb+'px',
+        'border-radius': radius,
+        'line-height': height_stb + 'px',
+        'right': margin_x_stb + 'px',
+        'top': margin_y_stb + 'px'
     });
     window.addEventListener('scroll', () => {
-    if (window.pageYOffset + $(window).height() < $(document).height()) {
-        $('#scrollToBottom').css('display', 'block');
-    } else {
-        $('#scrollToBottom').css('display', 'none');
-    }
+        if (window.scrollY + $(window).height() < $(document).height()) {
+            $('#scrollToBottom').css('display', 'block');
+        } else {
+            $('#scrollToBottom').css('display', 'none');
+        }
     });
 });
 

@@ -1,5 +1,5 @@
 /**
-* 2007-2023 PrestaShop
+* 2007-2024 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -18,7 +18,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author    PrestaShop SA <contact@prestashop.com>
-*  @copyright 2007-2023 PrestaShop SA
+*  @copyright 2007-2024 PrestaShop SA
 *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *
@@ -28,57 +28,57 @@
 
 jQuery(document).ready(function ($) {
     var _effect = effect;
-    var _back = back_enable;  
-    var _theme = theme;   
+    var _back = back_enable;
+    var _theme = theme;
     // if (theme == true)
     //     var _theme = 'fawesome';
     // else var _theme = 'default';        
 
-var $button = $.backToTop({
+    var $button = $.backToTop({
 
-    // background color
-    backgroundColor: background,
+        // background color
+        backgroundColor: background,
 
-    // text color
-    color: text,
+        // text color
+        color: text,
 
-    // container element
-    container: $('body'), 
+        // container element
+        container: $('body'),
 
-    // 'none', 'spin', 'fade', 'zoom', or 'spin-inverse'
-    effect: _effect,
+        // 'none', 'spin', 'fade', 'zoom', or 'spin-inverse'
+        effect: _effect,
 
-    // enable the Back to Top and Scroll to Bottom Buttons
-    enabled: _back, 
+        // enable the Back to Top and Scroll to Bottom Buttons
+        enabled: _back,
 
-    // width/height of the Back to Top and Scroll to Bottom Buttons
-    height: height,  
-    width: width,
+        // width/height of the Back to Top and Scroll to Bottom Buttons
+        height: height,
+        width: width,
 
-    // icon
-    icon: 'fas fa-chevron-up',
+        // icon
+        icon: 'fas fa-chevron-up',
 
-    // margins 
-    marginX: margin_x,
-    marginY: margin_y,
-    bottom: margin_y,
-    top: margin_y,
-    left: margin_x,
-    right: margin_x,
+        // margins 
+        marginX: margin_x,
+        marginY: margin_y,
+        bottom: margin_y,
+        top: margin_y,
+        left: margin_x,
+        right: margin_x,
 
-    // bottom/top left/right
-    position: 'bottom right',           
+        // bottom/top left/right
+        position: 'bottom right',
 
-    // trigger position
-    pxToTrigger: 600,
-    
-    // scroll animation
-    scrollAnimation: scrollAnimation, 
+        // trigger position
+        pxToTrigger: 600,
 
-    // or 'fawesome'
-    theme: _theme,
+        // scroll animation
+        scrollAnimation: scrollAnimation,
 
-    // z-index
-    zIndex: z_index
-});
+        // or 'fawesome'
+        theme: _theme,
+
+        // z-index
+        zIndex: z_index
+    });
 });
