@@ -3,17 +3,18 @@
  * License - MIT License
  */
 
-.float{
-	position:fixed;
-	text-align:center;
+.float {
+	position: fixed;
+	text-align: center;
 	box-shadow: 2px 2px 3px #999;
-     font-size: 150%;
-     float:right;
+	float: right;
 }
-.my-float-to-top{
-	margin-top:20%;
+
+.my-float-to-top {
+	/* margin-top: 20%; */
+	font-size: 175%;
 }
 
 .float:hover {
-     box-shadow:0 0 20px 0 rgba(0,0,0,0.40);
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.40);
 }
