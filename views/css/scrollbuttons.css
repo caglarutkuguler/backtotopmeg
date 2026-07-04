@@ -14,10 +14,20 @@
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .ps-scrollbtn:hover {
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.4);
+}
+
+.ps-scrollbtn:focus {
+    outline: none;
+}
+
+.ps-scrollbtn:focus-visible {
+    outline: 2px solid rgba(0, 0, 0, 0.35);
+    outline-offset: 2px;
 }
 
 .ps-scrollbtn i {
