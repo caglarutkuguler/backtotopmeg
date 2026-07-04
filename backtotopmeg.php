@@ -640,6 +640,7 @@ class Backtotopmeg extends Module
         Media::addJsDef([
             'backToTopSettings' => [
                 'enabled' => $showTop,
+                'isAdmin' => $isBackOffice,
                 'background' => Configuration::get('background'),
                 'color' => Configuration::get('text'),
                 'effect' => Configuration::get('effect'),
@@ -653,6 +654,7 @@ class Backtotopmeg extends Module
             ],
             'scrollToBottomSettings' => [
                 'enabled' => $showBottom,
+                'isAdmin' => $isBackOffice,
                 'background' => Configuration::get('background_stb'),
                 'color' => Configuration::get('text_stb'),
                 'height' => (int) Configuration::get('height_stb'),

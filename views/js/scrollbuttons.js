@@ -8,6 +8,11 @@
 
     var KNOWN_EFFECTS = ['none', 'spin', 'spin-inverse', 'zoom'];
 
+    // The PrestaShop back office top bar/header sits at a z-index around
+    // 1000-1050 depending on the theme. Keep our button above it there,
+    // without forcing an unnecessarily high value on the front office.
+    var ADMIN_MIN_Z_INDEX = 10000;
+
     function applyCommonStyles(el, settings, verticalSide) {
         var theme = settings.theme === 'default' ? 'default' : 'fawesome';
 
@@ -16,13 +21,15 @@
             el.classList.add('ps-scrollbtn--effect-' + settings.effect);
         }
 
+        var zIndex = settings.isAdmin ? Math.max(settings.zIndex, ADMIN_MIN_Z_INDEX) : settings.zIndex;
+
         el.style.backgroundColor = settings.background;
         el.style.color = settings.color;
         el.style.height = settings.height + 'px';
         el.style.width = settings.width + 'px';
         el.style.lineHeight = settings.height + 'px';
         el.style.fontSize = Math.round(settings.height * 0.45) + 'px';
-        el.style.zIndex = settings.zIndex;
+        el.style.zIndex = zIndex;
         el.style.right = settings.marginX + 'px';
         el.style[verticalSide] = settings.marginY + 'px';
     }

@@ -15,18 +15,23 @@
     visibility: hidden;
     transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
     -webkit-tap-highlight-color: transparent;
+    outline: none !important;
+    border: none !important;
 }
 
 .ps-scrollbtn:hover {
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.4) !important;
 }
 
-.ps-scrollbtn:focus {
-    outline: none;
+.ps-scrollbtn:focus,
+.ps-scrollbtn:active,
+.ps-scrollbtn.focus {
+    outline: none !important;
+    box-shadow: 2px 2px 3px #999 !important;
 }
 
 .ps-scrollbtn:focus-visible {
-    outline: 2px solid rgba(0, 0, 0, 0.35);
+    outline: 2px solid rgba(0, 0, 0, 0.35) !important;
     outline-offset: 2px;
 }
 
