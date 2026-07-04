@@ -21,6 +21,7 @@
 
 .ps-scrollbtn:hover {
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.4) !important;
+    text-decoration: underline !important;
 }
 
 .ps-scrollbtn:focus,
