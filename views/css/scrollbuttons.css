@@ -1,0 +1,104 @@
+/*!
+ * Smart Scroll Buttons - shared styles for the Back to Top and Scroll to Bottom buttons.
+ * Both buttons use the same markup/behavior (see scrollbuttons.js); only position and icon differ.
+ */
+.ps-scrollbtn {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 2px 2px 3px #999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+}
+
+.ps-scrollbtn:hover {
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.4);
+}
+
+.ps-scrollbtn i {
+    pointer-events: none;
+}
+
+.ps-scrollbtn--theme-fawesome {
+    border-radius: 25%;
+}
+
+.ps-scrollbtn--theme-default {
+    border-radius: 50%;
+}
+
+/* Visible states per effect */
+.ps-scrollbtn--visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.ps-scrollbtn--effect-none {
+    transition: none;
+}
+
+.ps-scrollbtn--effect-zoom {
+    transform: scale(0.5);
+    transition: opacity 0.3s ease-out, visibility 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.ps-scrollbtn--effect-zoom.ps-scrollbtn--visible {
+    transform: scale(1);
+}
+
+.ps-scrollbtn--effect-spin.ps-scrollbtn--visible {
+    animation: ps-scrollbtn-spin 0.4s linear;
+}
+
+.ps-scrollbtn--effect-spin-inverse.ps-scrollbtn--visible {
+    animation: ps-scrollbtn-spin-inverse 0.4s linear;
+}
+
+@keyframes ps-scrollbtn-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes ps-scrollbtn-spin-inverse {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+/* Shine sweep on hover, shared by both buttons */
+.ps-scrollbtn::before {
+    position: absolute;
+    top: 0;
+    left: -75%;
+    z-index: 1;
+    display: block;
+    content: '';
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .3) 100%);
+    transform: skewX(-25deg);
+}
+
+.ps-scrollbtn:hover::before {
+    animation: ps-scrollbtn-shine 0.5s;
+}
+
+@keyframes ps-scrollbtn-shine {
+    100% {
+        left: 125%;
+    }
+}
