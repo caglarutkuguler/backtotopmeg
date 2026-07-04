@@ -55,6 +55,12 @@
             return;
         }
 
+        // Some back office themes wrap hook output in a container with its own
+        // transform/positioning context, which traps position:fixed children
+        // and breaks stacking order (e.g. hidden behind the top bar). Moving
+        // the button to be a direct child of <body> avoids that entirely.
+        document.body.appendChild(el);
+
         applyCommonStyles(el, settings, 'bottom');
 
         function refresh() {
@@ -77,6 +83,8 @@
         if (!el) {
             return;
         }
+
+        document.body.appendChild(el);
 
         applyCommonStyles(el, settings, 'top');
 
