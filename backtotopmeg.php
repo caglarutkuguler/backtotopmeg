@@ -32,7 +32,7 @@ class Backtotopmeg extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('Smart Scroll Buttons - Back to Top & Scroll to Bottom');
+        $this->displayName = $this->l('Smart Scroll Buttons - Back to Top and Scroll to Bottom');
         $this->description = $this->l('Add fully customizable, one-click Back to Top and Scroll to Bottom buttons to your shop, with a live preview in the settings page.');
     }
 
