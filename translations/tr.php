@@ -75,6 +75,11 @@ $_MODULE['<{backtotopmeg}prestashop>e9ab394310ca1679464637292e3be609'] = 'Mağaz
 $_MODULE['<{backtotopmeg}prestashop>7c491b68fcdc8169f7aadfffbafaf47d'] = 'Yukarı dön';
 $_MODULE['<{backtotopmeg}prestashop>d233542f55ca00fe75950429c651066e'] = 'Aşağı kaydır';
 
+// --- Backfilled missing keys (auto-sync)
+$_MODULE['<{backtotopmeg}prestashop>backtotopmeg_5c9b52b8ebb33c98f5f7736b9b190ad8'] = '%1$s: "%2$s" geçerli bir renk değil.';
+$_MODULE['<{backtotopmeg}prestashop>backtotopmeg_b795eb6651897913d006660f7e0416b2'] = '%1$s: "%2$s" geçerli bir seçenek değil.';
+$_MODULE['<{backtotopmeg}prestashop>backtotopmeg_ee42be945181b446469165a828d612d5'] = '%1$s: "%2$s" geçerli değil. 0 veya daha fazla bir tam sayı girin.';
+
 // --- Auto-regenerated below: keys include the template-basename source segment
 //     PrestaShop 1.7+ actually looks up (<{module}prestashop>{basename}_{hash}).
 //     The entries above this line use the old (pre-1.7, basename-less) key format

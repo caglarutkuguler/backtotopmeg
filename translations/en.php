@@ -102,7 +102,7 @@ $_MODULE['<{backtotopmeg}prestashop>backtotopmeg_51c7bd14883142fd90b68fc6374ac79
 $_MODULE['<{backtotopmeg}prestashop>backtotopmeg_534b7c706186028f1b4f51344bbca176'] = 'Icon color';
 $_MODULE['<{backtotopmeg}prestashop>backtotopmeg_53f1db949a58775d20913e6d98ce9ada'] = 'Back to Top bottom margin';
 $_MODULE['<{backtotopmeg}prestashop>backtotopmeg_56ecae7b90955bd938757ce1bc32014b'] = 'Back to Top right margin';
-$_MODULE['<{backtotopmeg}prestashop>backtotopmeg_5c9b52b8ebb33c98f5f7736b9b190ad8'] = '%1$s: \"%2$s\" is not a valid color.';
+$_MODULE['<{backtotopmeg}prestashop>backtotopmeg_5c9b52b8ebb33c98f5f7736b9b190ad8'] = '%1$s: "%2$s" is not a valid color.';
 $_MODULE['<{backtotopmeg}prestashop>backtotopmeg_5d7024b62718cf31623a0fb3354cbc98'] = 'Shown while there is still more page to scroll through. Clicking it jumps to the bottom of the page.';
 $_MODULE['<{backtotopmeg}prestashop>backtotopmeg_613c9080d0ce91aef9ec5b1cd835f612'] = 'Bottom margin';
 $_MODULE['<{backtotopmeg}prestashop>backtotopmeg_628d91942023b7cce25ff1b0a1d7cf23'] = 'Appear animation';
@@ -123,7 +123,7 @@ $_MODULE['<{backtotopmeg}prestashop>backtotopmeg_96783b6988ea84e6b5306d6c1495795
 $_MODULE['<{backtotopmeg}prestashop>backtotopmeg_9f1985c52c1a29d471ca899de84a6b9f'] = 'Stacking layer. Higher values stay on top of other elements. Ex: 999';
 $_MODULE['<{backtotopmeg}prestashop>backtotopmeg_a120686c2349d821fa7f466123967c04'] = 'Smart Scroll Buttons - Back to Top and Scroll to Bottom';
 $_MODULE['<{backtotopmeg}prestashop>backtotopmeg_a5300d91a588f33615e17f456467d666'] = 'Add fully customizable, one-click Back to Top and Scroll to Bottom buttons to your shop, with a live preview in the settings page.';
-$_MODULE['<{backtotopmeg}prestashop>backtotopmeg_b795eb6651897913d006660f7e0416b2'] = '%1$s: \"%2$s\" is not a valid option.';
+$_MODULE['<{backtotopmeg}prestashop>backtotopmeg_b795eb6651897913d006660f7e0416b2'] = '%1$s: "%2$s" is not a valid option.';
 $_MODULE['<{backtotopmeg}prestashop>backtotopmeg_b90abc8e385ddb567dd3ea7e5e3feb92'] = 'Ex: 500. Higher is a slower, smoother scroll.';
 $_MODULE['<{backtotopmeg}prestashop>backtotopmeg_bafd7322c6e97d25b6299b5d6fe8920b'] = 'No';
 $_MODULE['<{backtotopmeg}prestashop>backtotopmeg_bb23a2557de701dd14edffc1016e939a'] = 'Scroll to Bottom z-index';
@@ -138,7 +138,7 @@ $_MODULE['<{backtotopmeg}prestashop>backtotopmeg_de356308479a18db4c9208c83497665
 $_MODULE['<{backtotopmeg}prestashop>backtotopmeg_dea4ef30c64c01df03392c38c634a2df'] = 'Scroll speed';
 $_MODULE['<{backtotopmeg}prestashop>backtotopmeg_dec7ff7bb416d96de1bd4647fe0c78b5'] = 'Back to Top z-index';
 $_MODULE['<{backtotopmeg}prestashop>backtotopmeg_e0ba33b3c4184db9054fb501c29870d5'] = 'Back to Top height';
-$_MODULE['<{backtotopmeg}prestashop>backtotopmeg_ee42be945181b446469165a828d612d5'] = '%1$s: \"%2$s\" is not valid. Enter a whole number of 0 or more.';
+$_MODULE['<{backtotopmeg}prestashop>backtotopmeg_ee42be945181b446469165a828d612d5'] = '%1$s: "%2$s" is not valid. Enter a whole number of 0 or more.';
 $_MODULE['<{backtotopmeg}prestashop>backtotopmeg_eec6c4bdbd339edf8cbea68becb85244'] = 'Height';
 $_MODULE['<{backtotopmeg}prestashop>backtotopmeg_f07bf07b3ffe5c3290c78957e0f4cc67'] = 'Back to Top width';
 $_MODULE['<{backtotopmeg}prestashop>backtotopmeg_f1813799f62d13fec9ff5455e0d212bd'] = 'Back to Top background color';
