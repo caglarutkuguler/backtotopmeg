@@ -101,6 +101,8 @@ class Backtotopmeg extends Module
 
     public function getContent()
     {
+        require_once _PS_MODULE_DIR_ . 'backtotopmeg/classes/MegVentureAdsWidget.php';
+
         $this->html = '';
         $this->html2 = '';
 
@@ -110,16 +112,18 @@ class Backtotopmeg extends Module
         $this->context->smarty->assign('preview', $this->getConfigFormValues() + $this->getConfigFormValues_stb());
         $output = $this->context->smarty->fetch($this->local_path . 'views/templates/admin/configure.tpl');
 
+        $ads = MegVentureAdsWidget::render('https://megventure.com/index.php?fc=module&module=virtualproductcombination&controller=adswidget');
+
         if (((bool) Tools::isSubmit('submitBacktotopmegModule')) == true) {
             $this->postProcess();
 
-            return $this->html . $output . $this->renderForm() . $this->renderForm_stb();
+            return $this->html . $output . $this->renderForm() . $this->renderForm_stb() . $ads;
         } elseif (((bool) Tools::isSubmit('submitBacktotopmegModule_stb')) == true) {
             $this->postProcess2();
 
-            return $this->html2 . $output . $this->renderForm() . $this->renderForm_stb();
+            return $this->html2 . $output . $this->renderForm() . $this->renderForm_stb() . $ads;
         } else {
-            return $output . $this->renderForm() . $this->renderForm_stb();
+            return $output . $this->renderForm() . $this->renderForm_stb() . $ads;
         }
     }
 
