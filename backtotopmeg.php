@@ -16,11 +16,47 @@ class Backtotopmeg extends Module
 
     private $post_errors = [];
 
+    /**
+     * Every setting this module stores lives under this prefix.
+     *
+     * Up to 2.0.0 the settings were written under bare names - 'background',
+     * 'text', 'theme', 'width', 'height', 'effect' and so on - into the
+     * shop-wide ps_configuration table. Those names are generic enough that
+     * another module could be using the same row, so this module could read a
+     * value it never wrote, and uninstalling it deleted rows that may have
+     * belonged to something else. upgrade-2.1.0.php copies the old values
+     * across.
+     */
+    const CONF_PREFIX = 'BTTM_';
+
+    /**
+     * Map a short setting name onto the configuration key it is stored under.
+     */
+    protected static function cfgKey($key)
+    {
+        return self::CONF_PREFIX . Tools::strtoupper($key);
+    }
+
+    protected static function cfgGet($key)
+    {
+        return Configuration::get(self::cfgKey($key));
+    }
+
+    protected static function cfgSet($key, $value)
+    {
+        return Configuration::updateValue(self::cfgKey($key), $value);
+    }
+
+    protected static function cfgDelete($key)
+    {
+        return Configuration::deleteByName(self::cfgKey($key));
+    }
+
     public function __construct()
     {
         $this->name = 'backtotopmeg';
         $this->tab = 'administration';
-        $this->version = '2.0.0';
+        $this->version = '2.1.0';
         $this->author = 'MEG Venture';
         $this->need_instance = 0;
         $this->module_key = '94f25f128f4703813f076d5e25ca4ac0';
@@ -38,29 +74,29 @@ class Backtotopmeg extends Module
 
     public function install()
     {
-        Configuration::updateValue('front_enable', true);
-        Configuration::updateValue('back_enable', true);
-        Configuration::updateValue('background', '#5D5D5D');
-        Configuration::updateValue('text', '#FFFFFF');
-        Configuration::updateValue('effect', 'zoom');
-        Configuration::updateValue('height', 40);
-        Configuration::updateValue('width', 40);
-        Configuration::updateValue('margin_x', 20);
-        Configuration::updateValue('margin_y', 20);
-        Configuration::updateValue('scrollAnimation', 500);
-        Configuration::updateValue('theme', 'fawesome');
-        Configuration::updateValue('z_index', 999);
-        Configuration::updateValue('front_enable_stb', true);
-        Configuration::updateValue('back_enable_stb', true);
-        Configuration::updateValue('background_stb', '#5D5D5D');
-        Configuration::updateValue('text_stb', '#FFFFFF');
-        Configuration::updateValue('height_stb', 40);
-        Configuration::updateValue('width_stb', 40);
-        Configuration::updateValue('margin_x_stb', 20);
-        Configuration::updateValue('margin_y_stb', 20);
-        Configuration::updateValue('scrollAnimation_stb', 500);
-        Configuration::updateValue('theme_stb', 'fawesome');
-        Configuration::updateValue('z_index_stb', 999);
+        self::cfgSet('front_enable', true);
+        self::cfgSet('back_enable', true);
+        self::cfgSet('background', '#5D5D5D');
+        self::cfgSet('text', '#FFFFFF');
+        self::cfgSet('effect', 'zoom');
+        self::cfgSet('height', 40);
+        self::cfgSet('width', 40);
+        self::cfgSet('margin_x', 20);
+        self::cfgSet('margin_y', 20);
+        self::cfgSet('scrollAnimation', 500);
+        self::cfgSet('theme', 'fawesome');
+        self::cfgSet('z_index', 999);
+        self::cfgSet('front_enable_stb', true);
+        self::cfgSet('back_enable_stb', true);
+        self::cfgSet('background_stb', '#5D5D5D');
+        self::cfgSet('text_stb', '#FFFFFF');
+        self::cfgSet('height_stb', 40);
+        self::cfgSet('width_stb', 40);
+        self::cfgSet('margin_x_stb', 20);
+        self::cfgSet('margin_y_stb', 20);
+        self::cfgSet('scrollAnimation_stb', 500);
+        self::cfgSet('theme_stb', 'fawesome');
+        self::cfgSet('z_index_stb', 999);
 
         return parent::install()
         && $this->registerHook('header')
@@ -71,30 +107,30 @@ class Backtotopmeg extends Module
 
     public function uninstall()
     {
-        Configuration::deleteByName('front_enable');
-        Configuration::deleteByName('back_enable');
-        Configuration::deleteByName('button_code');
-        Configuration::deleteByName('background');
-        Configuration::deleteByName('text');
-        Configuration::deleteByName('effect');
-        Configuration::deleteByName('height');
-        Configuration::deleteByName('width');
-        Configuration::deleteByName('margin_x');
-        Configuration::deleteByName('margin_y');
-        Configuration::deleteByName('scrollAnimation');
-        Configuration::deleteByName('theme');
-        Configuration::deleteByName('z_index');
-        Configuration::deleteByName('front_enable_stb');
-        Configuration::deleteByName('back_enable_stb');
-        Configuration::deleteByName('background_stb');
-        Configuration::deleteByName('text_stb');
-        Configuration::deleteByName('height_stb');
-        Configuration::deleteByName('width_stb');
-        Configuration::deleteByName('margin_x_stb');
-        Configuration::deleteByName('margin_y_stb');
-        Configuration::deleteByName('scrollAnimation_stb');
-        Configuration::deleteByName('theme_stb');
-        Configuration::deleteByName('z_index_stb');
+        self::cfgDelete('front_enable');
+        self::cfgDelete('back_enable');
+        self::cfgDelete('button_code');
+        self::cfgDelete('background');
+        self::cfgDelete('text');
+        self::cfgDelete('effect');
+        self::cfgDelete('height');
+        self::cfgDelete('width');
+        self::cfgDelete('margin_x');
+        self::cfgDelete('margin_y');
+        self::cfgDelete('scrollAnimation');
+        self::cfgDelete('theme');
+        self::cfgDelete('z_index');
+        self::cfgDelete('front_enable_stb');
+        self::cfgDelete('back_enable_stb');
+        self::cfgDelete('background_stb');
+        self::cfgDelete('text_stb');
+        self::cfgDelete('height_stb');
+        self::cfgDelete('width_stb');
+        self::cfgDelete('margin_x_stb');
+        self::cfgDelete('margin_y_stb');
+        self::cfgDelete('scrollAnimation_stb');
+        self::cfgDelete('theme_stb');
+        self::cfgDelete('z_index_stb');
 
         return parent::uninstall();
     }
@@ -489,35 +525,35 @@ class Backtotopmeg extends Module
     protected function getConfigFormValues()
     {
         return [
-            'front_enable' => Configuration::get('front_enable'),
-            'back_enable' => Configuration::get('back_enable'),
-            'background' => Configuration::get('background'),
-            'text' => Configuration::get('text'),
-            'effect' => Configuration::get('effect'),
-            'height' => Configuration::get('height'),
-            'width' => Configuration::get('width'),
-            'margin_x' => Configuration::get('margin_x'),
-            'margin_y' => Configuration::get('margin_y'),
-            'theme' => Configuration::get('theme'),
-            'scrollAnimation' => Configuration::get('scrollAnimation'),
-            'z_index' => Configuration::get('z_index'),
+            'front_enable' => self::cfgGet('front_enable'),
+            'back_enable' => self::cfgGet('back_enable'),
+            'background' => self::cfgGet('background'),
+            'text' => self::cfgGet('text'),
+            'effect' => self::cfgGet('effect'),
+            'height' => self::cfgGet('height'),
+            'width' => self::cfgGet('width'),
+            'margin_x' => self::cfgGet('margin_x'),
+            'margin_y' => self::cfgGet('margin_y'),
+            'theme' => self::cfgGet('theme'),
+            'scrollAnimation' => self::cfgGet('scrollAnimation'),
+            'z_index' => self::cfgGet('z_index'),
         ];
     }
 
     protected function getConfigFormValues_stb()
     {
         return [
-            'front_enable_stb' => Configuration::get('front_enable_stb'),
-            'back_enable_stb' => Configuration::get('back_enable_stb'),
-            'background_stb' => Configuration::get('background_stb'),
-            'text_stb' => Configuration::get('text_stb'),
-            'height_stb' => Configuration::get('height_stb'),
-            'width_stb' => Configuration::get('width_stb'),
-            'margin_x_stb' => Configuration::get('margin_x_stb'),
-            'margin_y_stb' => Configuration::get('margin_y_stb'),
-            'theme_stb' => Configuration::get('theme_stb'),
-            'scrollAnimation_stb' => Configuration::get('scrollAnimation_stb'),
-            'z_index_stb' => Configuration::get('z_index_stb'),
+            'front_enable_stb' => self::cfgGet('front_enable_stb'),
+            'back_enable_stb' => self::cfgGet('back_enable_stb'),
+            'background_stb' => self::cfgGet('background_stb'),
+            'text_stb' => self::cfgGet('text_stb'),
+            'height_stb' => self::cfgGet('height_stb'),
+            'width_stb' => self::cfgGet('width_stb'),
+            'margin_x_stb' => self::cfgGet('margin_x_stb'),
+            'margin_y_stb' => self::cfgGet('margin_y_stb'),
+            'theme_stb' => self::cfgGet('theme_stb'),
+            'scrollAnimation_stb' => self::cfgGet('scrollAnimation_stb'),
+            'z_index_stb' => self::cfgGet('z_index_stb'),
         ];
     }
 
@@ -565,7 +601,7 @@ class Backtotopmeg extends Module
 
         if (!count($this->post_errors)) {
             foreach (array_keys($this->getConfigFormValues()) as $key) {
-                Configuration::updateValue($key, Tools::getValue($key));
+                self::cfgSet($key, Tools::getValue($key));
             }
             $this->html .= $this->displayConfirmation($this->l('Settings updated successfully.'));
         } else {
@@ -591,7 +627,7 @@ class Backtotopmeg extends Module
 
         if (!count($this->post_errors)) {
             foreach (array_keys($this->getConfigFormValues_stb()) as $key) {
-                Configuration::updateValue($key, Tools::getValue($key));
+                self::cfgSet($key, Tools::getValue($key));
             }
             $this->html2 .= $this->displayConfirmation($this->l('Settings updated successfully.'));
         } else {
@@ -630,8 +666,8 @@ class Backtotopmeg extends Module
      */
     protected function renderScrollButtons($isBackOffice)
     {
-        $showTop = (bool) Configuration::get($isBackOffice ? 'back_enable' : 'front_enable');
-        $showBottom = (bool) Configuration::get($isBackOffice ? 'back_enable_stb' : 'front_enable_stb');
+        $showTop = (bool) self::cfgGet($isBackOffice ? 'back_enable' : 'front_enable');
+        $showBottom = (bool) self::cfgGet($isBackOffice ? 'back_enable_stb' : 'front_enable_stb');
 
         if (!$showTop && !$showBottom) {
             return '';
@@ -645,29 +681,29 @@ class Backtotopmeg extends Module
             'backToTopSettings' => [
                 'enabled' => $showTop,
                 'isAdmin' => $isBackOffice,
-                'background' => Configuration::get('background'),
-                'color' => Configuration::get('text'),
-                'effect' => Configuration::get('effect'),
-                'height' => (int) Configuration::get('height'),
-                'width' => (int) Configuration::get('width'),
-                'marginX' => (int) Configuration::get('margin_x'),
-                'marginY' => (int) Configuration::get('margin_y'),
-                'scrollAnimation' => (int) Configuration::get('scrollAnimation'),
-                'theme' => Configuration::get('theme'),
-                'zIndex' => (int) Configuration::get('z_index'),
+                'background' => self::cfgGet('background'),
+                'color' => self::cfgGet('text'),
+                'effect' => self::cfgGet('effect'),
+                'height' => (int) self::cfgGet('height'),
+                'width' => (int) self::cfgGet('width'),
+                'marginX' => (int) self::cfgGet('margin_x'),
+                'marginY' => (int) self::cfgGet('margin_y'),
+                'scrollAnimation' => (int) self::cfgGet('scrollAnimation'),
+                'theme' => self::cfgGet('theme'),
+                'zIndex' => (int) self::cfgGet('z_index'),
             ],
             'scrollToBottomSettings' => [
                 'enabled' => $showBottom,
                 'isAdmin' => $isBackOffice,
-                'background' => Configuration::get('background_stb'),
-                'color' => Configuration::get('text_stb'),
-                'height' => (int) Configuration::get('height_stb'),
-                'width' => (int) Configuration::get('width_stb'),
-                'marginX' => (int) Configuration::get('margin_x_stb'),
-                'marginY' => (int) Configuration::get('margin_y_stb'),
-                'scrollAnimation' => (int) Configuration::get('scrollAnimation_stb'),
-                'theme' => Configuration::get('theme_stb'),
-                'zIndex' => (int) Configuration::get('z_index_stb'),
+                'background' => self::cfgGet('background_stb'),
+                'color' => self::cfgGet('text_stb'),
+                'height' => (int) self::cfgGet('height_stb'),
+                'width' => (int) self::cfgGet('width_stb'),
+                'marginX' => (int) self::cfgGet('margin_x_stb'),
+                'marginY' => (int) self::cfgGet('margin_y_stb'),
+                'scrollAnimation' => (int) self::cfgGet('scrollAnimation_stb'),
+                'theme' => self::cfgGet('theme_stb'),
+                'zIndex' => (int) self::cfgGet('z_index_stb'),
             ],
         ]);
 

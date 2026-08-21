@@ -4,6 +4,8 @@ A Back to Top button and a Scroll to Bottom button for PrestaShop, each one inde
 
 **Compatibility:** PrestaShop 1.5 and above, including PrestaShop 8 and 9.
 
+**Installable zip:** the archive GitHub generates on the releases page is a source snapshot, not an installable module. Download the ready-to-install zip from [megventure.com](https://megventure.com/en/free-modules/63-prestashop-back-to-top-scroll-buttons-8691246246509.html).
+
 ## What it does
 
 - **Two buttons, independent of each other.** Back to Top appears once the visitor has scrolled down. Scroll to Bottom appears while there is still page below. Enable either, both, or neither — every setting below exists separately for each.
@@ -16,7 +18,7 @@ A Back to Top button and a Scroll to Bottom button for PrestaShop, each one inde
 
 ## What it deliberately does not do
 
-- **No database table.** Everything is stored as PrestaShop configuration values. Uninstalling removes them.
+- **No database table.** Everything is stored as PrestaShop configuration values, each under a `BTTM_` prefix so it cannot collide with another module's settings. Uninstalling removes those rows and nothing else.
 - **No tracking.** The module collects nothing about visitors and makes no external requests.
 - **No per-page rules.** The buttons are either on for the storefront or off. If you need them hidden on specific controllers, that is a theme-level CSS job.
 
@@ -33,6 +35,14 @@ The **Font Awesome** shape uses your theme's icon font. Most PrestaShop themes s
 Both buttons carry an `aria-label`, so a screen reader announces them rather than reading an empty link.
 
 If your theme already has a floating element in the same corner — a chat bubble, a cookie bar, a back-to-top of its own — either move this button with the X/Y margins or raise its z-index. Both are settings; no CSS override needed.
+
+## Tests
+
+```
+php tests/ConfigurationKeyTest.php
+```
+
+No PrestaShop required — `Configuration`, `Tools` and `Module` are stubbed. 21 assertions covering the 2.1.0 configuration-key change: install and uninstall never touch a configuration name this module does not own, and the upgrade carries existing settings across.
 
 ## Licence
 
