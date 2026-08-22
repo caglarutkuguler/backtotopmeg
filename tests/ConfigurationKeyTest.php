@@ -28,6 +28,10 @@ class Configuration
         self::$store[$k] = is_bool($v) ? ($v ? '1' : '0') : (string) $v;
         return true;
     }
+    public static function updateGlobalValue($k, $v)
+    {
+        return self::updateValue($k, $v);
+    }
     public static function deleteByName($k)
     {
         unset(self::$store[$k]);
@@ -86,8 +90,8 @@ ok($bare === array_keys(['theme' => 1, 'background' => 1]) || (in_array('theme',
 ok(Configuration::$store['theme'] === 'baska-modulun-degeri', "baska modulun 'theme' degeri bozulmadi");
 ok(Configuration::$store['background'] === '#AABBCC', "baska modulun 'background' degeri bozulmadi");
 ok(Configuration::$store['BTTM_BACKGROUND'] === '#5D5D5D', 'BTTM_BACKGROUND varsayilani yazildi');
-ok(count(array_filter(array_keys(Configuration::$store), function ($k) { return strpos($k, 'BTTM_') === 0; })) === 23,
-   '23 onekli ayar yazildi');
+ok(count(array_filter(array_keys(Configuration::$store), function ($k) { return strpos($k, 'BTTM_') === 0; })) === 24,
+   '24 onekli ayar yazildi (23 ayar + review nudge zaman damgasi)');
 
 echo "\n3) Kaldirma baska modulun anahtarina dokunuyor mu\n";
 $m->uninstall();

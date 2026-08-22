@@ -56,7 +56,7 @@ class Backtotopmeg extends Module
     {
         $this->name = 'backtotopmeg';
         $this->tab = 'administration';
-        $this->version = '2.1.0';
+        $this->version = '2.2.0';
         $this->author = 'MEG Venture';
         $this->need_instance = 0;
         $this->module_key = '94f25f128f4703813f076d5e25ca4ac0';
@@ -74,6 +74,8 @@ class Backtotopmeg extends Module
 
     public function install()
     {
+        require_once dirname(__FILE__) . '/classes/MegVentureReviewNudge.php';
+
         self::cfgSet('front_enable', true);
         self::cfgSet('back_enable', true);
         self::cfgSet('background', '#5D5D5D');
@@ -102,11 +104,15 @@ class Backtotopmeg extends Module
         && $this->registerHook('header')
         && $this->registerHook('backOfficeHeader')
         && $this->registerHook('displayBackOfficeHeader')
-        && $this->registerHook('displayHeader');
+        && $this->registerHook('displayHeader')
+        && MegVentureReviewNudge::onInstall();
     }
 
     public function uninstall()
     {
+        require_once dirname(__FILE__) . '/classes/MegVentureReviewNudge.php';
+        MegVentureReviewNudge::onUninstall();
+
         self::cfgDelete('front_enable');
         self::cfgDelete('back_enable');
         self::cfgDelete('button_code');
@@ -138,6 +144,16 @@ class Backtotopmeg extends Module
     public function getContent()
     {
         require_once _PS_MODULE_DIR_ . 'backtotopmeg/classes/MegVentureAdsWidget.php';
+        require_once _PS_MODULE_DIR_ . 'backtotopmeg/classes/MegVentureReviewNudge.php';
+
+        // May redirect (review click) — before anything renders on purpose.
+        // Concatenated configure URL on purpose: getAdminLink()'s $params
+        // argument does not exist on the oldest supported cores.
+        $nudge = MegVentureReviewNudge::handleRequest($this)
+            . MegVentureReviewNudge::render(
+                $this,
+                $this->context->link->getAdminLink('AdminModules', true) . '&configure=' . $this->name
+            );
 
         $this->html = '';
         $this->html2 = '';
@@ -153,13 +169,13 @@ class Backtotopmeg extends Module
         if (((bool) Tools::isSubmit('submitBacktotopmegModule')) == true) {
             $this->postProcess();
 
-            return $this->html . $output . $this->renderForm() . $this->renderForm_stb() . $ads;
+            return $nudge . $this->html . $output . $this->renderForm() . $this->renderForm_stb() . $ads;
         } elseif (((bool) Tools::isSubmit('submitBacktotopmegModule_stb')) == true) {
             $this->postProcess2();
 
-            return $this->html2 . $output . $this->renderForm() . $this->renderForm_stb() . $ads;
+            return $nudge . $this->html2 . $output . $this->renderForm() . $this->renderForm_stb() . $ads;
         } else {
-            return $output . $this->renderForm() . $this->renderForm_stb() . $ads;
+            return $nudge . $output . $this->renderForm() . $this->renderForm_stb() . $ads;
         }
     }
 
