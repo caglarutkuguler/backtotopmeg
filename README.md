@@ -12,8 +12,8 @@ A Back to Top button and a Scroll to Bottom button for PrestaShop, each one inde
 - **Works in the back office too.** Long configuration screens and product lists have the same problem as long storefront pages, so each button can be switched on for the back office independently of the front office.
 - **Live preview.** The settings page renders a mock shop page with your current colours, size, position and animation applied. You see the result before saving, not after.
 - **Appearance settings, per button:** background colour, icon colour, width and height in pixels, distance from the edges (X and Y margin), and z-index for themes that already stack floating elements.
-- **Appear animation, per button:** none, fade, zoom, spin, or spin-inverse.
-- **Shape, per button:** a Font Awesome chevron, or a plain shape that needs no icon font.
+- **Appear animation:** none, fade, zoom, spin, or spin-inverse. This one is a Back to Top setting; Scroll to Bottom always fades in.
+- **Shape, per button:** the chevron in a rounded square (*Font Awesome*) or in a circle (*default*). Both draw the same chevron; the setting changes the outline.
 - **Scroll duration, per button** — how long the scroll animation takes, in milliseconds. Set it low for an instant jump.
 
 ## What it deliberately does not do
@@ -30,7 +30,7 @@ A Back to Top button and a Scroll to Bottom button for PrestaShop, each one inde
 
 ## Notes
 
-The **Font Awesome** shape uses your theme's icon font. Most PrestaShop themes ship it; if yours does not, the chevron will not render — switch that button's shape to **default**, which draws without an icon font.
+The module carries its own trimmed copy of Font Awesome 5 Free — only the two solid glyphs it uses, chevron-up and chevron-down — and loads that stylesheet and web font itself, in the front office and in the back office. Your theme's icon font is never relied on, so the chevron renders whether or not the theme ships one. The **shape** setting therefore does not decide whether an icon appears: *Font Awesome* gives the button a rounded square, *default* gives it a circle.
 
 Both buttons carry an `aria-label`, so a screen reader announces them rather than reading an empty link.
 
