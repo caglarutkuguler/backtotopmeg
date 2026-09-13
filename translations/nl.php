@@ -156,3 +156,7 @@ $_MODULE['<{backtotopmeg}prestashop>configure_e6d095914637069be2375df9f0714bb1']
 $_MODULE['<{backtotopmeg}prestashop>configure_e9ab394310ca1679464637292e3be609'] = 'Uw winkelpagina';
 $_MODULE['<{backtotopmeg}prestashop>scroll_buttons_7c491b68fcdc8169f7aadfffbafaf47d'] = 'Terug naar boven';
 $_MODULE['<{backtotopmeg}prestashop>scroll_buttons_d233542f55ca00fe75950429c651066e'] = 'Scroll naar beneden';
+$_MODULE['<{backtotopmeg}prestashop>megventurereviewnudge_c980491d2b999421c4aa1ef4449323e1'] = 'Tevreden met deze module? Een korte review helpt andere webshops om hem te vinden.';
+$_MODULE['<{backtotopmeg}prestashop>megventurereviewnudge_6ecbf3c5ab7a06f08c526f02bce2b2d6'] = 'Een review achterlaten';
+$_MODULE['<{backtotopmeg}prestashop>megventurereviewnudge_8ad4303b83a62fb6ca3b025bad5bc114'] = 'Nee, bedankt';
+$_MODULE['<{backtotopmeg}prestashop>megventurereviewnudge_4d170dcb0d03a0efa011c9193219bb68'] = 'Prima, we vragen het niet opnieuw.';

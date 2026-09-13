@@ -156,3 +156,7 @@ $_MODULE['<{backtotopmeg}prestashop>configure_e6d095914637069be2375df9f0714bb1']
 $_MODULE['<{backtotopmeg}prestashop>configure_e9ab394310ca1679464637292e3be609'] = 'La pagina del tuo negozio';
 $_MODULE['<{backtotopmeg}prestashop>scroll_buttons_7c491b68fcdc8169f7aadfffbafaf47d'] = 'Torna su';
 $_MODULE['<{backtotopmeg}prestashop>scroll_buttons_d233542f55ca00fe75950429c651066e'] = 'Scorri in basso';
+$_MODULE['<{backtotopmeg}prestashop>megventurereviewnudge_c980491d2b999421c4aa1ef4449323e1'] = 'Soddisfatto di questo modulo? Una breve recensione aiuta altri commercianti a trovarlo.';
+$_MODULE['<{backtotopmeg}prestashop>megventurereviewnudge_6ecbf3c5ab7a06f08c526f02bce2b2d6'] = 'Lascia una recensione';
+$_MODULE['<{backtotopmeg}prestashop>megventurereviewnudge_8ad4303b83a62fb6ca3b025bad5bc114'] = 'No, grazie';
+$_MODULE['<{backtotopmeg}prestashop>megventurereviewnudge_4d170dcb0d03a0efa011c9193219bb68'] = 'Va bene, non lo chiederemo più.';
