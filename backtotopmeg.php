@@ -164,7 +164,7 @@ class Backtotopmeg extends Module
         $this->context->smarty->assign('preview', $this->getConfigFormValues() + $this->getConfigFormValues_stb());
         $output = $this->context->smarty->fetch($this->local_path . 'views/templates/admin/configure.tpl');
 
-        $ads = MegVentureAdsWidget::render('https://megventure.com/index.php?fc=module&module=virtualproductcombination&controller=adswidget');
+        $ads = MegVentureAdsWidgetV2::render('https://megventure.com/index.php?fc=module&module=virtualproductcombination&controller=adswidget');
 
         if (((bool) Tools::isSubmit('submitBacktotopmegModule')) == true) {
             $this->postProcess();
