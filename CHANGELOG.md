@@ -2,7 +2,7 @@
 
 All notable changes to **Smart Scroll Buttons** (`backtotopmeg`).
 
-## 2.2.2
+## 2.2.2
 
 ### Added
 
