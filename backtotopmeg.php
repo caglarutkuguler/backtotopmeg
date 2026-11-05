@@ -56,7 +56,7 @@ class Backtotopmeg extends Module
     {
         $this->name = 'backtotopmeg';
         $this->tab = 'administration';
-        $this->version = '2.2.1';
+        $this->version = '2.2.2';
         $this->author = 'MEG Venture';
         $this->need_instance = 0;
         $this->module_key = '94f25f128f4703813f076d5e25ca4ac0';
@@ -141,6 +141,29 @@ class Backtotopmeg extends Module
         return parent::uninstall();
     }
 
+    /**
+     * One line pointing to the free MEG Venture Updates module, shown on the
+     * configuration page until that module is installed. A static link only:
+     * nothing is requested from megventure.com.
+     */
+    private function renderMvuNotice()
+    {
+        if (Module::isInstalled('megventureupdates')) {
+            return '';
+        }
+        $iso = Tools::strtolower((string) $this->context->language->iso_code);
+        if (!in_array($iso, array('en', 'tr', 'fr', 'es', 'de', 'it', 'nl', 'pl', 'pt'), true)) {
+            $iso = 'en';
+        }
+        $this->context->smarty->assign(array(
+            'mvu_notice_text' => $this->l('Get updates for this module in one click: install the free MEG Venture Updates module.'),
+            'mvu_notice_link' => $this->l('How it works'),
+            'mvu_notice_url' => 'https://megventure.com/' . $iso . '/content/17-module-updates',
+        ));
+
+        return $this->display(__FILE__, 'views/templates/admin/mvu_notice.tpl');
+    }
+
     public function getContent()
     {
         require_once _PS_MODULE_DIR_ . 'backtotopmeg/classes/MegVentureAdsWidget.php';
@@ -164,7 +187,7 @@ class Backtotopmeg extends Module
         $this->context->smarty->assign('preview', $this->getConfigFormValues() + $this->getConfigFormValues_stb());
         $output = $this->context->smarty->fetch($this->local_path . 'views/templates/admin/configure.tpl');
 
-        $ads = MegVentureAdsWidgetV2::render('https://megventure.com/index.php?fc=module&module=virtualproductcombination&controller=adswidget');
+        $ads = $this->renderMvuNotice() . MegVentureAdsWidgetV2::render('https://megventure.com/index.php?fc=module&module=virtualproductcombination&controller=adswidget');
 
         if (((bool) Tools::isSubmit('submitBacktotopmegModule')) == true) {
             $this->postProcess();
