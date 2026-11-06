@@ -1,6 +1,6 @@
 # Smart Scroll Buttons
 
-**Version:** 2.2.1
+**Version:** 2.2.2
 
 A Back to Top button and a Scroll to Bottom button for PrestaShop, each one independently configurable, with a preview in the settings page that updates as you change things — before you save.
 
